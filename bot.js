@@ -401,17 +401,13 @@
             action: "loadPreviousSession",
             sessionId: currentSessionId,
             route: config.webhook.route,
-            metadata: {
-                userId: ""
-            }
+            metadata: { userId: "" }
         }];
 
         try {
             const response = await fetch(config.webhook.url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
 
@@ -423,6 +419,8 @@
             // Exibe a mensagem do bot usando innerHTML para interpretar o HTML
             const botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'chat-message bot';
+            // Para teste, você pode usar:
+            // botMessageDiv.innerHTML = '<strong>Teste HTML</strong>';
             botMessageDiv.innerHTML = Array.isArray(responseData) ? responseData[0].output : responseData.output;
             messagesContainer.appendChild(botMessageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -437,9 +435,7 @@
             sessionId: currentSessionId,
             route: config.webhook.route,
             chatInput: message,
-            metadata: {
-                userId: ""
-            }
+            metadata: { userId: "" }
         };
 
         const userMessageDiv = document.createElement('div');
@@ -451,9 +447,7 @@
         try {
             const response = await fetch(config.webhook.url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(messageData)
             });
             
