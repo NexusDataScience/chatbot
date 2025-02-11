@@ -218,23 +218,6 @@
             transform: scale(1.05);
         }
 
-        /* Estilos para o botão WhatsApp (quando exibido como mensagem) */
-        .n8n-chat-widget .chat-message button.chat-whatsapp-button {
-            background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 16px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            font-family: inherit;
-            font-weight: 500;
-        }
-
-        .n8n-chat-widget .chat-message button.chat-whatsapp-button:hover {
-            transform: scale(1.05);
-        }
-
         .n8n-chat-widget .chat-toggle {
             position: fixed;
             bottom: 20px;
@@ -437,28 +420,11 @@
             chatContainer.querySelector('.new-conversation').style.display = 'none';
             chatInterface.classList.add('active');
 
-            // Exibe a mensagem de resposta do bot
+            // Exibe a mensagem do bot usando innerHTML para interpretar o HTML
             const botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'chat-message bot';
-            botMessageDiv.textContent = Array.isArray(responseData) ? responseData[0].output : responseData.output;
+            botMessageDiv.innerHTML = Array.isArray(responseData) ? responseData[0].output : responseData.output;
             messagesContainer.appendChild(botMessageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            // Adiciona o botão do WhatsApp como uma mensagem do bot
-            const whatsappMessageDiv = document.createElement('div');
-            whatsappMessageDiv.className = 'chat-message bot';
-            const whatsappButton = document.createElement('button');
-            whatsappButton.type = 'button';
-            whatsappButton.className = 'chat-whatsapp-button';
-            whatsappButton.textContent = 'WhatsApp';
-            whatsappButton.addEventListener('click', () => {
-                // Substitua pelo número ou link do WhatsApp desejado
-                const whatsappNumber = '5511999999999'; // Exemplo: '55' + DDD + número
-                const whatsappLink = `https://wa.me/${whatsappNumber}`;
-                window.open(whatsappLink, '_blank');
-            });
-            whatsappMessageDiv.appendChild(whatsappButton);
-            messagesContainer.appendChild(whatsappMessageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         } catch (error) {
             console.error('Error:', error);
@@ -495,7 +461,7 @@
             
             const botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'chat-message bot';
-            botMessageDiv.textContent = Array.isArray(data) ? data[0].output : data.output;
+            botMessageDiv.innerHTML = Array.isArray(data) ? data[0].output : data.output;
             messagesContainer.appendChild(botMessageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         } catch (error) {
